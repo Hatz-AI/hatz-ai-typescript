@@ -1,0 +1,647 @@
+openapi: "3.1.0"
+info:
+  title: "Hatz API"
+  description: "Hatz AI's API"
+  termsOfService: "https://www.hatz.ai/terms-of-use"
+  contact:
+    name: "Hatz AI"
+    url: "https://www.hatz.ai/"
+    email: "help@hatz.ai"
+  version: "0.1.0"
+paths:
+  "/v1/chat/models":
+    get:
+      tags:
+        - "completions"
+      summary: "Get Models"
+      description: "Get the list of available ai models."
+      operationId: "get_models_v1_chat_models_get"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/ModelsResponse"}
+      security:
+        - APIKeyHeader: []
+  "/v1/chat/completions":
+    post:
+      tags:
+        - "completions"
+      summary: "Post Completions"
+      description: "Post a completion request to the ai model.\n\nReturns:\n\n    - StreamingResponse when request.stream=True\n\n    - CompletionResponse when request.stream=False"
+      operationId: "post_completions_v1_chat_completions_post"
+      requestBody:
+        content:
+          "application/json":
+            schema: {"$ref": "#/components/schemas/CompletionRequest"}
+        required: true
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            "application/json":
+              schema:
+                anyOf:
+                  - {"$ref": "#/components/schemas/CompletionResponse"}
+                  - {"$ref": "#/components/schemas/CompletionsStreamingResponse"}
+                title: "Response Post Completions V1 Chat Completions Post"
+        "422":
+          description: "Validation Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/HTTPValidationError"}
+      security:
+        - APIKeyHeader: []
+  "/v1/files/upload":
+    post:
+      tags:
+        - "file upload"
+      summary: "Upload File"
+      operationId: "upload_file_v1_files_upload_post"
+      requestBody:
+        content:
+          "multipart/form-data":
+            schema: {"$ref": "#/components/schemas/Body_upload_file_v1_files_upload_post"}
+        required: true
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            "application/json":
+              schema: {}
+        "422":
+          description: "Validation Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/HTTPValidationError"}
+      security:
+        - APIKeyHeader: []
+  "/v1/files/":
+    get:
+      tags:
+        - "file upload"
+      summary: "Get Files"
+      operationId: "get_files_v1_files__get"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            "application/json":
+              schema: {}
+      security:
+        - APIKeyHeader: []
+  "/v1/app/models":
+    get:
+      tags:
+        - "app builder"
+      summary: "Get Models"
+      description: "Get the list of available ai models."
+      operationId: "get_models_v1_app_models_get"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/ModelsResponse"}
+      security:
+        - APIKeyHeader: []
+  "/v1/app/list":
+    get:
+      tags:
+        - "app builder"
+      summary: "List All Apps"
+      operationId: "list_all_apps_v1_app_list_get"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/AppListResponse"}
+      security:
+        - APIKeyHeader: []
+  "/v1/app/{app_id}":
+    get:
+      tags:
+        - "app builder"
+      summary: "Get App By Id"
+      description: "Get an app's data by its id."
+      operationId: "get_app_by_id_v1_app__app_id__get"
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - name: "app_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+            description: "The unique identifier of the app to retrieve"
+            title: "App Id"
+          description: "The unique identifier of the app to retrieve"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/AppResponse"}
+        "422":
+          description: "Validation Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/HTTPValidationError"}
+  "/v1/app/{app_id}/query":
+    post:
+      tags:
+        - "app builder"
+      summary: "Query App"
+      description: "Post a completion request to the ai model given an app id and set of inputs.\n\nInputs are usually in the form of JSON object like:\n\n`{'<variable_name>': '<value>'}` \n\nExample: `{'name': 'John', 'age': 25}`\n\n\nThe variable name should be the same as the variable name in the app.\n\nReturns:\n\n    - StreamingResponse when request.stream=True\n\n    - CompletionResponse when request.stream=False"
+      operationId: "query_app_v1_app__app_id__query_post"
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - name: "app_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+            description: "The unique identifier of the app to query"
+            title: "App Id"
+          description: "The unique identifier of the app to query"
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema: {"$ref": "#/components/schemas/AppQueryRequest"}
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            "application/json":
+              schema:
+                anyOf:
+                  - {"$ref": "#/components/schemas/CompletionResponse"}
+                  - {"$ref": "#/components/schemas/CompletionsStreamingResponse"}
+                title: "Response Query App V1 App  App Id  Query Post"
+        "422":
+          description: "Validation Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/HTTPValidationError"}
+components:
+  schemas:
+    "AIModel":
+      properties:
+        "name":
+          type: "string"
+          title: "Name"
+          description: "The unique identifier/name of the AI model. Use this to specify the model in requests."
+        "developer":
+          type: "string"
+          title: "Developer"
+          description: "The company/organization that developed this model"
+        "display_name":
+          type: "string"
+          title: "Display Name"
+          description: "The human-readable display name for this model"
+        "max_tokens":
+          type: "integer"
+          title: "Max Tokens"
+          description: "The maximum number of tokens this model can process"
+        "vision":
+          type: "boolean"
+          title: "Vision"
+          description: "Whether this model has vision/image processing capabilities"
+      type: "object"
+      required:
+        - "name"
+        - "developer"
+        - "display_name"
+        - "max_tokens"
+        - "vision"
+      title: "AIModel"
+    "AppConstant":
+      properties:
+        "object_id":
+          type: "string"
+          title: "Object Id"
+          description: "The unique object identifier for this constant"
+        "variable_name":
+          type: "string"
+          title: "Variable Name"
+          description: "The variable name used internally"
+        "display_name":
+          type: "string"
+          title: "Display Name"
+          description: "The display name shown to users"
+        "description":
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Description"
+          description: "A description of this constant"
+        "variable_type":
+          type: "string"
+          enum:
+            - "text"
+          const: "text"
+          title: "Variable Type"
+          description: "The type of constant (only 'text' supported)"
+        "value":
+          type: "string"
+          title: "Value"
+          description: "The value of this constant"
+      type: "object"
+      required:
+        - "object_id"
+        - "variable_name"
+        - "display_name"
+        - "variable_type"
+        - "value"
+      title: "AppConstant"
+    "AppFileResponse":
+      properties:
+        "size":
+          type: "integer"
+          title: "Size"
+          description: "The size of the file in bytes"
+        "module":
+          type: "string"
+          title: "Module"
+          description: "The module this file belongs to"
+        "file_id":
+          type: "string"
+          title: "File Id"
+          description: "The unique identifier for this file"
+          default: ""
+        "type_id":
+          type: "string"
+          title: "Type Id"
+          description: "The type identifier for this file"
+          default: ""
+        "file_key":
+          type: "string"
+          title: "File Key"
+          description: "The key/name of the file"
+        "file_type":
+          type: "string"
+          title: "File Type"
+          description: "The type of file (e.g. PDF)"
+        "object_id":
+          type: "string"
+          title: "Object Id"
+          description: "The object identifier for this file"
+        "description":
+          type: "string"
+          title: "Description"
+          description: "A description of the file"
+        "display_name":
+          type: "string"
+          title: "Display Name"
+          description: "The display name of the file"
+        "variable_name":
+          type: "string"
+          title: "Variable Name"
+          description: "The variable name associated with this file"
+        "variable_type":
+          type: "string"
+          title: "Variable Type"
+          description: "The type of variable this file represents"
+      type: "object"
+      required:
+        - "size"
+        - "module"
+        - "file_key"
+        - "file_type"
+        - "object_id"
+        - "description"
+        - "display_name"
+        - "variable_name"
+        - "variable_type"
+      title: "AppFileResponse"
+    "AppListResponse":
+      properties:
+        "data":
+          items: {"$ref": "#/components/schemas/AppResponse"}
+          type: "array"
+          title: "Data"
+          description: "The list of apps"
+      type: "object"
+      required:
+        - "data"
+      title: "AppListResponse"
+    "AppQueryRequest":
+      properties:
+        "inputs":
+          type: "object"
+          title: "Inputs"
+          description: "The list of inputs on the app to process. Usually in the form of JSON object like {'\\<variable_name\\>': '\\<value\\>'}. The variable name should be the same as the variable name in the app."
+        "model":
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Model"
+          description: "The AI model to use for processing. Please use the unique name of the model, not the display name"
+          default: "gpt-4o"
+        "stream":
+          type: "boolean"
+          title: "Stream"
+          description: "Whether to stream the response"
+          default: false
+        "file_uuids":
+          anyOf:
+            - items:
+                type: "string"
+                format: "uuid4"
+              type: "array"
+            - type: "null"
+          title: "File Uuids"
+          description: "The list of file uuids to process"
+          default: []
+      type: "object"
+      required:
+        - "inputs"
+      title: "AppQueryRequest"
+    "AppResponse":
+      properties:
+        "name":
+          type: "string"
+          title: "Name"
+          description: "The name of the app"
+        "description":
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Description"
+          description: "The description of the app"
+        "default_model":
+          type: "string"
+          title: "Default Model"
+          description: "The default AI model to use"
+          default: "gpt-4o"
+        "files":
+          items: {"$ref": "#/components/schemas/AppFileResponse"}
+          type: "array"
+          title: "Files"
+          description: "The files associated with this app"
+        "constants":
+          items: {"$ref": "#/components/schemas/AppConstant"}
+          type: "array"
+          title: "Constants"
+          description: "The constants associated with this app"
+          default: []
+        "user_inputs":
+          items: {"$ref": "#/components/schemas/AppUserInputResponse"}
+          type: "array"
+          title: "User Inputs"
+          description: "The user inputs associated with this app"
+        "prompt_sections":
+          items: {"$ref": "#/components/schemas/PromptSection"}
+          type: "array"
+          title: "Prompt Sections"
+          description: "The prompt sections associated with this app"
+      type: "object"
+      required:
+        - "name"
+        - "files"
+        - "user_inputs"
+        - "prompt_sections"
+      title: "AppResponse"
+    "AppUserInputResponse":
+      properties:
+        "position":
+          type: "integer"
+          title: "Position"
+          description: "The position/order of this input field"
+        "required":
+          type: "boolean"
+          title: "Required"
+          description: "Whether this input is required"
+        "object_id":
+          type: "string"
+          title: "Object Id"
+          description: "The unique object identifier for this input"
+        "description":
+          type: "string"
+          title: "Description"
+          description: "A description of this input field"
+        "display_name":
+          type: "string"
+          title: "Display Name"
+          description: "The display name shown to users"
+        "variable_name":
+          type: "string"
+          title: "Variable Name"
+          description: "The variable name used internally"
+        "variable_type":
+          type: "string"
+          title: "Variable Type"
+          description: "The type of input (e.g. short_answer)"
+      type: "object"
+      required:
+        - "position"
+        - "required"
+        - "object_id"
+        - "description"
+        - "display_name"
+        - "variable_name"
+        - "variable_type"
+      title: "AppUserInputResponse"
+    "Body_upload_file_v1_files_upload_post":
+      properties:
+        "file":
+          type: "string"
+          title: "File"
+          format: "binary"
+        "only_calculate_tokens":
+          type: "boolean"
+          title: "Only Calculate Tokens"
+          default: false
+      type: "object"
+      required:
+        - "file"
+      title: "Body_upload_file_v1_files_upload_post"
+    "CompletionRequest":
+      properties:
+        "messages":
+          items: {"$ref": "#/components/schemas/Message"}
+          type: "array"
+          title: "Messages"
+          description: "The list of messages to process"
+        "model":
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Model"
+          description: "The AI model to use for processing. Please use the unique name of the model, not the display name"
+          default: "gpt-4o"
+        "stream":
+          type: "boolean"
+          title: "Stream"
+          description: "Whether to stream the response"
+          default: false
+        "file_uuids":
+          anyOf:
+            - items:
+                type: "string"
+                format: "uuid4"
+              type: "array"
+            - type: "null"
+          title: "File Uuids"
+          description: "The list of file uuids to process"
+          default: []
+      type: "object"
+      required:
+        - "messages"
+      title: "CompletionRequest"
+    "CompletionResponse":
+      properties:
+        "choices":
+          items: {"$ref": "#/components/schemas/CompletionResponseChoice"}
+          type: "array"
+          title: "Choices"
+          description: "List of completion choices"
+        "model":
+          type: "string"
+          title: "Model"
+          description: "The AI model used for processing"
+        "usage": {"$ref": "#/components/schemas/Usage", "description": "Token usage statistics"}
+      type: "object"
+      required:
+        - "choices"
+        - "model"
+        - "usage"
+      title: "CompletionResponse"
+    "CompletionResponseChoice":
+      properties:
+        "message": {"$ref": "#/components/schemas/CompletionResponseMessage", "description": "The message response from the AI"}
+      type: "object"
+      required:
+        - "message"
+      title: "CompletionResponseChoice"
+    "CompletionResponseMessage":
+      properties:
+        "content":
+          type: "string"
+          title: "Content"
+          description: "The content of the response message"
+        "role":
+          type: "string"
+          enum:
+            - "assistant"
+          const: "assistant"
+          title: "Role"
+          description: "The role of the message sender"
+      type: "object"
+      required:
+        - "content"
+        - "role"
+      title: "CompletionResponseMessage"
+    "CompletionsStreamingResponse":
+      properties:
+        "type":
+          type: "string"
+          title: "Type"
+          description: "The type of response (e.g. completion)"
+        "message":
+          type: "string"
+          title: "Message"
+          description: "The message to be streamed"
+      type: "object"
+      required:
+        - "type"
+        - "message"
+      title: "CompletionsStreamingResponse"
+    "HTTPValidationError":
+      properties:
+        "detail":
+          items: {"$ref": "#/components/schemas/ValidationError"}
+          type: "array"
+          title: "Detail"
+      type: "object"
+      title: "HTTPValidationError"
+    "Message":
+      properties:
+        "role":
+          type: "string"
+          enum:
+            - "system"
+            - "user"
+            - "assistant"
+          title: "Role"
+          description: "The role of the message sender"
+        "content":
+          type: "string"
+          title: "Content"
+          description: "The content of the message"
+      type: "object"
+      required:
+        - "role"
+        - "content"
+      title: "Message"
+    "ModelsResponse":
+      properties:
+        "data":
+          items: {"$ref": "#/components/schemas/AIModel"}
+          type: "array"
+          title: "Data"
+          description: "The list of available AI models"
+      type: "object"
+      required:
+        - "data"
+      title: "ModelsResponse"
+    "PromptSection":
+      properties:
+        "body":
+          type: "string"
+          title: "Body"
+        "position":
+          type: "integer"
+          title: "Position"
+      type: "object"
+      required:
+        - "body"
+        - "position"
+      title: "PromptSection"
+    "Usage":
+      properties:
+        "input_tokens":
+          type: "integer"
+          title: "Input Tokens"
+          description: "Number of input tokens used"
+        "output_tokens":
+          type: "integer"
+          title: "Output Tokens"
+          description: "Number of output tokens used"
+      type: "object"
+      required:
+        - "input_tokens"
+        - "output_tokens"
+      title: "Usage"
+    "ValidationError":
+      properties:
+        "loc":
+          items:
+            anyOf:
+              - type: "string"
+              - type: "integer"
+          type: "array"
+          title: "Location"
+        "msg":
+          type: "string"
+          title: "Message"
+        "type":
+          type: "string"
+          title: "Error Type"
+      type: "object"
+      required:
+        - "loc"
+        - "msg"
+        - "type"
+      title: "ValidationError"
+  securitySchemes:
+    "APIKeyHeader":
+      type: "apiKey"
+      name: "X-API-Key"
+      in: "header"

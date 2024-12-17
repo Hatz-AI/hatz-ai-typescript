@@ -1,0 +1,88 @@
+overlay: 1.0.0
+info:
+  title: Speakeasy Modifications
+  version: 0.0.2
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/files/"]["get"]
+    update:
+      x-speakeasy-group: files
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.file upload.get_files_v1_files__get()
+      after: sdk.files.list()
+      reviewed_at: 1734470203062
+      created_at: 1734469264405
+  - target: $["paths"]["/app/models"]["get"]
+    update:
+      x-speakeasy-group: appModels
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.app builder.get_models_v1_app_models_get()
+      after: sdk.appModels.list()
+      reviewed_at: 1734470203062
+      created_at: 1734469264405
+  - target: $["paths"]["/app/list"]["get"]
+    update:
+      x-speakeasy-group: apps
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.app builder.list_all_apps_v1_app_list_get()
+      after: sdk.apps.list()
+      reviewed_at: 1734470203062
+      created_at: 1734469264405
+  - target: $["paths"]["/app/{app_id}"]["get"]
+    update:
+      x-speakeasy-group: apps
+      x-speakeasy-name-override: getById
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.app builder.get_app_by_id_v1_app__app_id__get()
+      after: sdk.apps.getById()
+      reviewed_at: 1734470203062
+      created_at: 1734469264405
+  - target: $["paths"]["/app/{app_id}/query"]["post"]
+    update:
+      x-speakeasy-group: apps
+      x-speakeasy-name-override: query
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.app builder.query_app_v1_app__app_id__query_post()
+      after: sdk.apps.query()
+      reviewed_at: 1734470203062
+      created_at: 1734469264405
+  - target: $["paths"]["/chat/models"]["get"]
+    update:
+      x-speakeasy-group: models
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.completions.get_models_v1_chat_models_get()
+      after: sdk.models.list()
+      reviewed_at: 1734470203062
+      created_at: 1734469264406
+  - target: $["paths"]["/chat/completions"]["post"]
+    update:
+      x-speakeasy-name-override: post
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.completions.post_completions_v1_chat_completions_post()
+      after: sdk.completions.post()
+      reviewed_at: 1734470203062
+      created_at: 1734469264406
+  - target: $["paths"]["/files/upload"]["post"]
+    update:
+      x-speakeasy-group: files
+      x-speakeasy-name-override: upload
+    x-speakeasy-metadata:
+      type: method-name
+      before: sdk.file upload.upload_file_v1_files_upload_post()
+      after: sdk.files.upload()
+      reviewed_at: 1734470203062
+      created_at: 1734469264405

@@ -1,0 +1,216 @@
+lockVersion: 2.0.0
+id: ba1af778-3657-46a5-a276-9fbf50211b7f
+management:
+  docChecksum: f05b42581c3554f385e45d545cc1c6ae
+  docVersion: 0.1.0
+  speakeasyVersion: 1.456.0
+  generationVersion: 2.481.0
+  releaseVersion: 0.1.1
+  configChecksum: cd9707ef09129d6a34268cbfe758bc6b
+features:
+  typescript:
+    additionalDependencies: 0.1.0
+    constsAndDefaults: 0.1.11
+    core: 3.18.11
+    defaultEnabledRetries: 0.1.0
+    devContainers: 2.90.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.1.2
+    globalSecurity: 2.82.11
+    globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
+    globalServerURLs: 2.82.4
+    groups: 2.81.2
+    nameOverrides: 2.81.2
+    nullables: 0.1.0
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.2.0
+    unions: 2.85.8
+    uploadStreams: 0.1.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .eslintrc.cjs
+  - .gitattributes
+  - .npmignore
+  - CONTRIBUTING.md
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/components/aimodel.md
+  - docs/models/components/appconstant.md
+  - docs/models/components/appfileresponse.md
+  - docs/models/components/applistresponse.md
+  - docs/models/components/appqueryrequest.md
+  - docs/models/components/appresponse.md
+  - docs/models/components/appuserinputresponse.md
+  - docs/models/components/bodyuploadfilev1filesuploadpost.md
+  - docs/models/components/completionrequest.md
+  - docs/models/components/completionresponse.md
+  - docs/models/components/completionresponsechoice.md
+  - docs/models/components/completionresponsemessage.md
+  - docs/models/components/completionresponsemessagerole.md
+  - docs/models/components/completionsstreamingresponse.md
+  - docs/models/components/filet.md
+  - docs/models/components/inputs.md
+  - docs/models/components/loc.md
+  - docs/models/components/message.md
+  - docs/models/components/modelsresponse.md
+  - docs/models/components/promptsection.md
+  - docs/models/components/role.md
+  - docs/models/components/security.md
+  - docs/models/components/usage.md
+  - docs/models/components/validationerror.md
+  - docs/models/components/variabletype.md
+  - docs/models/errors/httpvalidationerror.md
+  - docs/models/operations/getappbyidv1appappidgetrequest.md
+  - docs/models/operations/postcompletionsv1chatcompletionspostresponsepostcompletionsv1chatcompletionspost.md
+  - docs/models/operations/queryappv1appappidquerypostrequest.md
+  - docs/models/operations/queryappv1appappidquerypostresponsequeryappv1appappidquerypost.md
+  - docs/sdks/appmodels/README.md
+  - docs/sdks/apps/README.md
+  - docs/sdks/completions/README.md
+  - docs/sdks/files/README.md
+  - docs/sdks/hatzai/README.md
+  - docs/sdks/models/README.md
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/appModelsList.ts
+  - src/funcs/appsGetById.ts
+  - src/funcs/appsList.ts
+  - src/funcs/appsQuery.ts
+  - src/funcs/completionsPost.ts
+  - src/funcs/filesList.ts
+  - src/funcs/filesUpload.ts
+  - src/funcs/modelsList.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/env.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/models/components/aimodel.ts
+  - src/models/components/appconstant.ts
+  - src/models/components/appfileresponse.ts
+  - src/models/components/applistresponse.ts
+  - src/models/components/appqueryrequest.ts
+  - src/models/components/appresponse.ts
+  - src/models/components/appuserinputresponse.ts
+  - src/models/components/bodyuploadfilev1filesuploadpost.ts
+  - src/models/components/completionrequest.ts
+  - src/models/components/completionresponse.ts
+  - src/models/components/completionresponsechoice.ts
+  - src/models/components/completionresponsemessage.ts
+  - src/models/components/completionsstreamingresponse.ts
+  - src/models/components/index.ts
+  - src/models/components/message.ts
+  - src/models/components/modelsresponse.ts
+  - src/models/components/promptsection.ts
+  - src/models/components/security.ts
+  - src/models/components/usage.ts
+  - src/models/components/validationerror.ts
+  - src/models/errors/apierror.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/httpvalidationerror.ts
+  - src/models/errors/index.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/operations/getappbyidv1appappidget.ts
+  - src/models/operations/index.ts
+  - src/models/operations/postcompletionsv1chatcompletionspost.ts
+  - src/models/operations/queryappv1appappidquerypost.ts
+  - src/sdk/appmodels.ts
+  - src/sdk/apps.ts
+  - src/sdk/completions.ts
+  - src/sdk/files.ts
+  - src/sdk/index.ts
+  - src/sdk/models.ts
+  - src/sdk/sdk.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/rfcdate.ts
+  - src/types/streams.ts
+  - tsconfig.json
+examples:
+  get_models_v1_chat_models_get:
+    speakeasy-default-get-models-v1-chat-models-get:
+      responses:
+        "200":
+          application/json: {"data": [{"name": "<value>", "developer": "<value>", "display_name": "Jermey_Ebert", "max_tokens": 881046, "vision": true}, {"name": "<value>", "developer": "<value>", "display_name": "Birdie_OKon34", "max_tokens": 413398, "vision": false}]}
+  post_completions_v1_chat_completions_post:
+    speakeasy-default-post-completions-v1-chat-completions-post:
+      requestBody:
+        application/json: {"messages": [{"role": "assistant", "content": "<value>"}, {"role": "user", "content": "<value>"}, {"role": "assistant", "content": "<value>"}]}
+      responses:
+        "200":
+          application/json: {"choices": [{"message": {"content": "<value>"}}, {"message": {"content": "<value>"}}], "model": "Grand Caravan", "usage": {"input_tokens": 871119, "output_tokens": 42444}}
+        "422":
+          application/json: {}
+  upload_file_v1_files_upload_post:
+    speakeasy-default-upload-file-v1-files-upload-post:
+      requestBody:
+        multipart/form-data: {"file": {}}
+      responses:
+        "200":
+          application/json: "<value>"
+        "422":
+          application/json: {}
+  get_files_v1_files__get:
+    speakeasy-default-get-files-v1-files-get:
+      responses:
+        "200":
+          application/json: "<value>"
+  get_models_v1_app_models_get:
+    speakeasy-default-get-models-v1-app-models-get:
+      responses:
+        "200":
+          application/json: {"data": [{"name": "<value>", "developer": "<value>", "display_name": "Sam_Romaguera33", "max_tokens": 675777, "vision": false}, {"name": "<value>", "developer": "<value>", "display_name": "Kaley.Grant", "max_tokens": 318252, "vision": true}, {"name": "<value>", "developer": "<value>", "display_name": "Evelyn.Reichert70", "max_tokens": 518069, "vision": false}]}
+  list_all_apps_v1_app_list_get:
+    speakeasy-default-list-all-apps-v1-app-list-get:
+      responses:
+        "200":
+          application/json: {"data": [{"name": "<value>", "files": [{"size": 921766, "module": "<value>", "file_key": "<value>", "file_type": "image", "object_id": "<id>", "description": "psst ripe apropos elegantly whoever aboard ah afore reiterate ew", "display_name": "Francis_Breitenberg68", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 550663, "module": "<value>", "file_key": "<value>", "file_type": "application", "object_id": "<id>", "description": "famously hmph overconfidently", "display_name": "Beverly.Ziemann94", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 909964, "module": "<value>", "file_key": "<value>", "file_type": "audio", "object_id": "<id>", "description": "pitiful tightly fuss pfft which haunting whether failing", "display_name": "Lamont_OKeefe", "variable_name": "<value>", "variable_type": "<value>"}], "user_inputs": [{"position": 291785, "required": false, "object_id": "<id>", "description": "fortunately amount burly well-documented geez", "display_name": "Sonny.Rath", "variable_name": "<value>", "variable_type": "<value>"}, {"position": 616976, "required": false, "object_id": "<id>", "description": "duh enlightened nor stabilise um discontinue successfully", "display_name": "Adelbert.Schuppe58", "variable_name": "<value>", "variable_type": "<value>"}], "prompt_sections": [{"body": "<value>", "position": 456974}, {"body": "<value>", "position": 923230}, {"body": "<value>", "position": 269672}]}, {"name": "<value>", "files": [{"size": 248901, "module": "<value>", "file_key": "<value>", "file_type": "image", "object_id": "<id>", "description": "prejudge sonnet by boo however outrun mill ugh yahoo", "display_name": "Bridgette33", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 661141, "module": "<value>", "file_key": "<value>", "file_type": "audio", "object_id": "<id>", "description": "sleepily woefully against unless disrespect membership indeed declaration a untidy", "display_name": "Nick.Hessel13", "variable_name": "<value>", "variable_type": "<value>"}], "user_inputs": [{"position": 59348, "required": true, "object_id": "<id>", "description": "disrespect why finally cruelty down quickly squirm except", "display_name": "Amya47", "variable_name": "<value>", "variable_type": "<value>"}, {"position": 132101, "required": false, "object_id": "<id>", "description": "scarily quarterly exalt", "display_name": "Bettye_Moore", "variable_name": "<value>", "variable_type": "<value>"}, {"position": 35824, "required": false, "object_id": "<id>", "description": "yellowish worthwhile uh-huh outlying consequently", "display_name": "Micheal_Muller", "variable_name": "<value>", "variable_type": "<value>"}], "prompt_sections": [{"body": "<value>", "position": 182404}, {"body": "<value>", "position": 841485}, {"body": "<value>", "position": 355827}]}, {"name": "<value>", "files": [{"size": 650918, "module": "<value>", "file_key": "<value>", "file_type": "application", "object_id": "<id>", "description": "orient ah cinch youthfully hence", "display_name": "Korbin.Runolfsson86", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 883979, "module": "<value>", "file_key": "<value>", "file_type": "video", "object_id": "<id>", "description": "until only self-reliant", "display_name": "Ivy53", "variable_name": "<value>", "variable_type": "<value>"}], "user_inputs": [{"position": 809212, "required": false, "object_id": "<id>", "description": "via prejudge deserted lampoon since coolly surprise pupil even behind", "display_name": "Ruby.Hoeger15", "variable_name": "<value>", "variable_type": "<value>"}, {"position": 257393, "required": false, "object_id": "<id>", "description": "yahoo swing wherever beneath merrily", "display_name": "Katelin64", "variable_name": "<value>", "variable_type": "<value>"}], "prompt_sections": [{"body": "<value>", "position": 503615}]}]}
+  get_app_by_id_v1_app__app_id__get:
+    speakeasy-default-get-app-by-id-v1-app-app-id-get:
+      parameters:
+        path:
+          app_id: "47adbf4e-b0d6-44fd-a643-30949eaf1b55"
+      responses:
+        "200":
+          application/json: {"name": "<value>", "files": [], "user_inputs": [{"position": 477601, "required": false, "object_id": "<id>", "description": "so airmail rejigger under", "display_name": "Bernie.Cassin81", "variable_name": "<value>", "variable_type": "<value>"}], "prompt_sections": [{"body": "<value>", "position": 542393}]}
+        "422":
+          application/json: {}
+  query_app_v1_app__app_id__query_post:
+    speakeasy-default-query-app-v1-app-app-id-query-post:
+      parameters:
+        path:
+          app_id: "da7fa77e-f572-45dc-a417-baf2faf1fe5d"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"type": "<value>", "message": "<value>"}
+        "422":
+          application/json: {}
+generatedTests: {}
