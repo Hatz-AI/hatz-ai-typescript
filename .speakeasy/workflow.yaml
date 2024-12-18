@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     Hatz API:
         inputs:
-            - location: ../hatz-api/openapi_spec.json
+            - location: https://hatz-app-assets.s3.us-east-1.amazonaws.com/api_spec/openapi_spec.json
         overlays:
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
         registry:
@@ -12,6 +12,9 @@ targets:
     hatz-ai:
         target: typescript
         source: Hatz API
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/hatz-ai/general/hatz-api-typescript-code-samples
