@@ -2,8 +2,8 @@ speakeasyVersion: 1.456.0
 sources:
     Hatz API:
         sourceNamespace: hatz-api
-        sourceRevisionDigest: sha256:2b198433062b3aeb37df8e001aa9e0568b308a142986a6bebf9b5e5755af1169
-        sourceBlobDigest: sha256:d25794365096d30b02f89641775502c664af17026f4f13575e8dd0109c607971
+        sourceRevisionDigest: sha256:fcd5ca1fb8d7b3bfa411d16263d636cafc3a9f1607078ee2adbb4a2b289957cd
+        sourceBlobDigest: sha256:46da737547dd17546a83c4a7c5b37e1512ff0e86d3aec03741f3136d565a03be
         tags:
             - latest
             - 0.1.0
@@ -11,17 +11,17 @@ targets:
     hatz-ai:
         source: Hatz API
         sourceNamespace: hatz-api
-        sourceRevisionDigest: sha256:2b198433062b3aeb37df8e001aa9e0568b308a142986a6bebf9b5e5755af1169
-        sourceBlobDigest: sha256:d25794365096d30b02f89641775502c664af17026f4f13575e8dd0109c607971
+        sourceRevisionDigest: sha256:fcd5ca1fb8d7b3bfa411d16263d636cafc3a9f1607078ee2adbb4a2b289957cd
+        sourceBlobDigest: sha256:46da737547dd17546a83c4a7c5b37e1512ff0e86d3aec03741f3136d565a03be
         codeSamplesNamespace: hatz-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:41dd3030bb31d6a89558b649fa0c799d0a2f3d3af5eed189c9c90afdda1d69fb
+        codeSamplesRevisionDigest: sha256:6aeed45af64357caa8ac4411f73c47518d463cb3bc3ab357320772007ed72cca
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         Hatz API:
             inputs:
-                - location: ../hatz-api/openapi_spec.json
+                - location: https://hatz-app-assets.s3.us-east-1.amazonaws.com/api_spec/openapi_spec.json
             overlays:
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
             registry:
@@ -30,6 +30,9 @@ workflow:
         hatz-ai:
             target: typescript
             source: Hatz API
+            publish:
+                npm:
+                    token: $npm_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/hatz-ai/general/hatz-api-typescript-code-samples
