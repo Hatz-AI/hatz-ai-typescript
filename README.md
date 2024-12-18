@@ -1,21 +1,16 @@
 # hatz-ai
 
-Developer-friendly & type-safe Typescript SDK specifically catered to leverage *hatz-ai* API.
-
-<div align="left">
-    <a href="https://www.speakeasy.com/?utm_source=hatz-ai&utm_campaign=typescript"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
+<div align="center">
+    <picture>
+        <img src="https://github.com/user-attachments/assets/03620e3c-7d83-447b-9d71-5e240d57342b" width="250">
+    </picture>
+   <p>The Secure AI Platform for MSPs and SMBs</p>
+<br>
+<a href="https://www.speakeasy.com/?utm_source=hatz-ai&utm_campaign=typescript"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
     <a href="https://opensource.org/licenses/MIT">
-        <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
     </a>
 </div>
-
-
-<br /><br />
-<!-- Start Summary [summary] -->
-## Summary
-
-Hatz API: Hatz AI's API
-<!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
