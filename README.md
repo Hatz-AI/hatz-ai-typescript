@@ -12,6 +12,12 @@
     </a>
 </div>
 
+<!-- Start Summary [summary] -->
+## Summary
+
+Hatz API: Hatz AI's API
+<!-- End Summary [summary] -->
+
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
@@ -64,6 +70,58 @@ yarn add hatz-ai zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
+```
+
+
+
+### Model Context Protocol (MCP) Server
+
+This SDK is also an installable MCP server where the various SDK methods are
+exposed as tools that can be invoked by AI applications.
+
+> Node.js v20 or greater is required to run the MCP server.
+
+<details>
+<summary>Claude installation steps</summary>
+
+Add the following server definition to your `claude_desktop_config.json` file:
+
+```json
+{
+  "mcpServers": {
+    "HatzAI": {
+      "command": "npx",
+      "args": [
+        "-y", "--package", "hatz-ai",
+        "--",
+        "mcp", "start",
+        "--api-key-header", "..."
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary>Cursor installation steps</summary>
+
+Go to `Cursor Settings > Features > MCP Servers > Add new MCP server` and use the following settings:
+
+- Name: HatzAI
+- Type: `command`
+- Command:
+```sh
+npx -y --package hatz-ai -- mcp start --api-key-header ... 
+```
+
+</details>
+
+For a full list of server arguments, run:
+
+```sh
+npx -y --package hatz-ai -- mcp start --help
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -318,14 +376,6 @@ async function run() {
           role: "assistant",
           content: "<value>",
         },
-        {
-          role: "user",
-          content: "<value>",
-        },
-        {
-          role: "assistant",
-          content: "<value>",
-        },
       ],
     });
 
@@ -376,12 +426,12 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
+The default server can be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
 import { HatzAI } from "hatz-ai";
 
 const hatzAI = new HatzAI({
-  serverURL: "https://ai-dev.hatz.ai/v1",
+  serverURL: "https://ai.hatz.ai/v1",
   apiKeyHeader: process.env["HATZAI_API_KEY_HEADER"] ?? "",
 });
 

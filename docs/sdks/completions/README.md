@@ -33,14 +33,6 @@ async function run() {
         role: "assistant",
         content: "<value>",
       },
-      {
-        role: "user",
-        content: "<value>",
-      },
-      {
-        role: "assistant",
-        content: "<value>",
-      },
     ],
   });
 
@@ -68,14 +60,6 @@ const hatzAI = new HatzAICore({
 async function run() {
   const res = await completionsPost(hatzAI, {
     messages: [
-      {
-        role: "assistant",
-        content: "<value>",
-      },
-      {
-        role: "user",
-        content: "<value>",
-      },
       {
         role: "assistant",
         content: "<value>",

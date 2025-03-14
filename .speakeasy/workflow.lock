@@ -1,20 +1,21 @@
-speakeasyVersion: 1.456.0
+speakeasyVersion: 1.517.3
 sources:
     Hatz API:
         sourceNamespace: hatz-api
-        sourceRevisionDigest: sha256:fcd5ca1fb8d7b3bfa411d16263d636cafc3a9f1607078ee2adbb4a2b289957cd
-        sourceBlobDigest: sha256:46da737547dd17546a83c4a7c5b37e1512ff0e86d3aec03741f3136d565a03be
+        sourceRevisionDigest: sha256:737bf9e7cf840126bd3fa2c22fb39faaba6853fbe25a3743238ee05d381dea0d
+        sourceBlobDigest: sha256:1e963c754702b892355d6fce490692a53421bf217dec9181cd78c192535f5f20
         tags:
             - latest
+            - speakeasy-sdk-regen-1741973505
             - 0.1.0
 targets:
     hatz-ai:
         source: Hatz API
         sourceNamespace: hatz-api
-        sourceRevisionDigest: sha256:fcd5ca1fb8d7b3bfa411d16263d636cafc3a9f1607078ee2adbb4a2b289957cd
-        sourceBlobDigest: sha256:46da737547dd17546a83c4a7c5b37e1512ff0e86d3aec03741f3136d565a03be
+        sourceRevisionDigest: sha256:737bf9e7cf840126bd3fa2c22fb39faaba6853fbe25a3743238ee05d381dea0d
+        sourceBlobDigest: sha256:1e963c754702b892355d6fce490692a53421bf217dec9181cd78c192535f5f20
         codeSamplesNamespace: hatz-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:6aeed45af64357caa8ac4411f73c47518d463cb3bc3ab357320772007ed72cca
+        codeSamplesRevisionDigest: sha256:675f9720ae77848226a86f99a96a465cb699921fb87836ede4a0011a5cf9fc04
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

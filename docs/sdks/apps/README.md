@@ -95,7 +95,7 @@ const hatzAI = new HatzAI({
 
 async function run() {
   const result = await hatzAI.apps.getById({
-    appId: "47adbf4e-b0d6-44fd-a643-30949eaf1b55",
+    appId: "494da5be-4224-44d6-879c-5a5ab8a332c3",
   });
 
   // Handle the result
@@ -121,7 +121,7 @@ const hatzAI = new HatzAICore({
 
 async function run() {
   const res = await appsGetById(hatzAI, {
-    appId: "47adbf4e-b0d6-44fd-a643-30949eaf1b55",
+    appId: "494da5be-4224-44d6-879c-5a5ab8a332c3",
   });
 
   if (!res.ok) {
@@ -187,7 +187,7 @@ const hatzAI = new HatzAI({
 
 async function run() {
   const result = await hatzAI.apps.query({
-    appId: "da7fa77e-f572-45dc-a417-baf2faf1fe5d",
+    appId: "cf0da8ab-dfe6-4421-9e0a-b5d90dc41e8b",
     appQueryRequest: {
       inputs: {},
     },
@@ -216,7 +216,7 @@ const hatzAI = new HatzAICore({
 
 async function run() {
   const res = await appsQuery(hatzAI, {
-    appId: "da7fa77e-f572-45dc-a417-baf2faf1fe5d",
+    appId: "cf0da8ab-dfe6-4421-9e0a-b5d90dc41e8b",
     appQueryRequest: {
       inputs: {},
     },

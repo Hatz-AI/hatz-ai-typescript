@@ -12,23 +12,23 @@ import { Params, pathToFunc } from "./url.js";
  */
 export const ServerList = [
   /**
-   * Development server
+   * Hatz API Production Server
    */
-  "https://ai-dev.hatz.ai/v1",
+  "https://ai.hatz.ai/v1",
 ] as const;
 
 export type SDKOptions = {
-  apiKeyHeader?: string | (() => Promise<string>);
+  apiKeyHeader?: string | (() => Promise<string>) | undefined;
 
   httpClient?: HTTPClient;
   /**
    * Allows overriding the default server used by the SDK
    */
-  serverIdx?: number;
+  serverIdx?: number | undefined;
   /**
    * Allows overriding the default server URL used by the SDK
    */
-  serverURL?: string;
+  serverURL?: string | undefined;
   /**
    * Allows overriding the default retry config used by the SDK
    */
@@ -57,7 +57,7 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "0.1.0",
-  sdkVersion: "0.1.2",
-  genVersion: "2.481.0",
-  userAgent: "speakeasy-sdk/typescript 0.1.2 2.481.0 0.1.0 hatz-ai",
+  sdkVersion: "0.2.0",
+  genVersion: "2.548.6",
+  userAgent: "speakeasy-sdk/typescript 0.2.0 2.548.6 0.1.0 hatz-ai",
 } as const;
