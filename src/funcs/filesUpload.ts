@@ -4,8 +4,10 @@
 
 import * as z from "zod";
 import { HatzAICore } from "../core.js";
+import { appendForm } from "../lib/encodings.js";
 import { readableStreamToArrayBuffer } from "../lib/files.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -21,6 +23,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { isBlobLike } from "../types/blobs.js";
 import { Result } from "../types/fp.js";
 import { isReadableStream } from "../types/streams.js";
@@ -28,11 +31,11 @@ import { isReadableStream } from "../types/streams.js";
 /**
  * Upload File
  */
-export async function filesUpload(
+export function filesUpload(
   client: HatzAICore,
   request: components.BodyUploadFileV1FilesUploadPost,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     any,
     | errors.HTTPValidationError
@@ -45,6 +48,33 @@ export async function filesUpload(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: HatzAICore,
+  request: components.BodyUploadFileV1FilesUploadPost,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      any,
+      | errors.HTTPValidationError
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -52,39 +82,41 @@ export async function filesUpload(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = new FormData();
 
   if (isBlobLike(payload.file)) {
-    body.append("file", payload.file);
+    appendForm(body, "file", payload.file);
   } else if (isReadableStream(payload.file.content)) {
     const buffer = await readableStreamToArrayBuffer(payload.file.content);
     const blob = new Blob([buffer], { type: "application/octet-stream" });
-    body.append("file", blob);
+    appendForm(body, "file", blob);
   } else {
-    body.append(
+    appendForm(
+      body,
       "file",
       new Blob([payload.file.content], { type: "application/octet-stream" }),
       payload.file.fileName,
     );
   }
   if (payload.only_calculate_tokens !== undefined) {
-    body.append("only_calculate_tokens", String(payload.only_calculate_tokens));
+    appendForm(body, "only_calculate_tokens", payload.only_calculate_tokens);
   }
 
   const path = pathToFunc("/files/upload")();
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.apiKeyHeader);
   const securityInput = secConfig == null ? {} : { apiKeyHeader: secConfig };
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "upload_file_v1_files_upload_post",
     oAuth2Scopes: [],
 
@@ -107,7 +139,7 @@ export async function filesUpload(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -118,7 +150,7 @@ export async function filesUpload(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -139,11 +171,12 @@ export async function filesUpload(
   >(
     M.json(200, z.any()),
     M.jsonErr(422, errors.HTTPValidationError$inboundSchema),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

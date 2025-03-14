@@ -1,29 +1,32 @@
 lockVersion: 2.0.0
 id: ba1af778-3657-46a5-a276-9fbf50211b7f
 management:
-  docChecksum: f05b42581c3554f385e45d545cc1c6ae
+  docChecksum: 9bc7bb3fdb577d96f9bff2f10286c61b
   docVersion: 0.1.0
-  speakeasyVersion: 1.456.0
-  generationVersion: 2.481.0
-  releaseVersion: 0.1.2
-  configChecksum: a141fc0e97f26b06d44045260d099473
+  speakeasyVersion: 1.517.3
+  generationVersion: 2.548.6
+  releaseVersion: 0.2.0
+  configChecksum: 3276462d29c4417837f7426a7d325499
+  repoURL: https://github.com/Hatz-AI/hatz-ai-typescript.git
+  installationURL: https://github.com/Hatz-AI/hatz-ai-typescript
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.11
+    core: 3.21.4
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    globalSecurity: 2.82.11
+    globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
     groups: 2.81.2
+    mcpServer: 0.7.0
     nameOverrides: 2.81.2
-    nullables: 0.1.0
+    nullables: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.2.0
@@ -33,10 +36,8 @@ generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
   - .devcontainer/setup.sh
-  - .eslintrc.cjs
   - .gitattributes
   - .npmignore
-  - CONTRIBUTING.md
   - FUNCTIONS.md
   - RUNTIMES.md
   - USAGE.md
@@ -77,6 +78,7 @@ generatedFiles:
   - docs/sdks/files/README.md
   - docs/sdks/hatzai/README.md
   - docs/sdks/models/README.md
+  - eslint.config.mjs
   - jsr.json
   - package.json
   - src/core.ts
@@ -108,6 +110,26 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
+  - src/mcp-server/build.mts
+  - src/mcp-server/cli.ts
+  - src/mcp-server/cli/start/command.ts
+  - src/mcp-server/cli/start/impl.ts
+  - src/mcp-server/console-logger.ts
+  - src/mcp-server/extensions.ts
+  - src/mcp-server/mcp-server.ts
+  - src/mcp-server/resources.ts
+  - src/mcp-server/scopes.ts
+  - src/mcp-server/server.ts
+  - src/mcp-server/shared.ts
+  - src/mcp-server/tools.ts
+  - src/mcp-server/tools/appModelsList.ts
+  - src/mcp-server/tools/appsGetById.ts
+  - src/mcp-server/tools/appsList.ts
+  - src/mcp-server/tools/appsQuery.ts
+  - src/mcp-server/tools/completionsPost.ts
+  - src/mcp-server/tools/filesList.ts
+  - src/mcp-server/tools/filesUpload.ts
+  - src/mcp-server/tools/modelsList.ts
   - src/models/components/aimodel.ts
   - src/models/components/appconstant.ts
   - src/models/components/appfileresponse.ts
@@ -144,6 +166,7 @@ generatedFiles:
   - src/sdk/index.ts
   - src/sdk/models.ts
   - src/sdk/sdk.ts
+  - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -158,20 +181,20 @@ examples:
     speakeasy-default-get-models-v1-chat-models-get:
       responses:
         "200":
-          application/json: {"data": [{"name": "<value>", "developer": "<value>", "display_name": "Jermey_Ebert", "max_tokens": 881046, "vision": true}, {"name": "<value>", "developer": "<value>", "display_name": "Birdie_OKon34", "max_tokens": 413398, "vision": false}]}
+          application/json: {"data": [{"name": "<value>", "developer": "<value>", "display_name": "Kassandra.Daugherty", "max_tokens": 639387, "vision": true}, {"name": "<value>", "developer": "<value>", "display_name": "Miles_Bernhard", "max_tokens": 7468, "vision": true}, {"name": "<value>", "developer": "<value>", "display_name": "Fredy56", "max_tokens": 490078, "vision": true}]}
   post_completions_v1_chat_completions_post:
     speakeasy-default-post-completions-v1-chat-completions-post:
       requestBody:
-        application/json: {"messages": [{"role": "assistant", "content": "<value>"}, {"role": "user", "content": "<value>"}, {"role": "assistant", "content": "<value>"}]}
+        application/json: {"messages": [{"role": "assistant", "content": "<value>"}], "stream": false}
       responses:
         "200":
-          application/json: {"choices": [{"message": {"content": "<value>"}}, {"message": {"content": "<value>"}}], "model": "Grand Caravan", "usage": {"input_tokens": 871119, "output_tokens": 42444}}
+          application/json: {"type": "<value>", "message": "<value>"}
         "422":
           application/json: {}
   upload_file_v1_files_upload_post:
     speakeasy-default-upload-file-v1-files-upload-post:
       requestBody:
-        multipart/form-data: {"file": {}}
+        multipart/form-data: {"file": {"": "x-file: example.file"}, "only_calculate_tokens": false}
       responses:
         "200":
           application/json: "<value>"
@@ -186,32 +209,33 @@ examples:
     speakeasy-default-get-models-v1-app-models-get:
       responses:
         "200":
-          application/json: {"data": [{"name": "<value>", "developer": "<value>", "display_name": "Sam_Romaguera33", "max_tokens": 675777, "vision": false}, {"name": "<value>", "developer": "<value>", "display_name": "Kaley.Grant", "max_tokens": 318252, "vision": true}, {"name": "<value>", "developer": "<value>", "display_name": "Evelyn.Reichert70", "max_tokens": 518069, "vision": false}]}
+          application/json: {"data": [{"name": "<value>", "developer": "<value>", "display_name": "Kassandra.Daugherty", "max_tokens": 639387, "vision": true}, {"name": "<value>", "developer": "<value>", "display_name": "Miles_Bernhard", "max_tokens": 7468, "vision": true}, {"name": "<value>", "developer": "<value>", "display_name": "Fredy56", "max_tokens": 490078, "vision": true}]}
   list_all_apps_v1_app_list_get:
     speakeasy-default-list-all-apps-v1-app-list-get:
       responses:
         "200":
-          application/json: {"data": [{"name": "<value>", "files": [{"size": 921766, "module": "<value>", "file_key": "<value>", "file_type": "image", "object_id": "<id>", "description": "psst ripe apropos elegantly whoever aboard ah afore reiterate ew", "display_name": "Francis_Breitenberg68", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 550663, "module": "<value>", "file_key": "<value>", "file_type": "application", "object_id": "<id>", "description": "famously hmph overconfidently", "display_name": "Beverly.Ziemann94", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 909964, "module": "<value>", "file_key": "<value>", "file_type": "audio", "object_id": "<id>", "description": "pitiful tightly fuss pfft which haunting whether failing", "display_name": "Lamont_OKeefe", "variable_name": "<value>", "variable_type": "<value>"}], "user_inputs": [{"position": 291785, "required": false, "object_id": "<id>", "description": "fortunately amount burly well-documented geez", "display_name": "Sonny.Rath", "variable_name": "<value>", "variable_type": "<value>"}, {"position": 616976, "required": false, "object_id": "<id>", "description": "duh enlightened nor stabilise um discontinue successfully", "display_name": "Adelbert.Schuppe58", "variable_name": "<value>", "variable_type": "<value>"}], "prompt_sections": [{"body": "<value>", "position": 456974}, {"body": "<value>", "position": 923230}, {"body": "<value>", "position": 269672}]}, {"name": "<value>", "files": [{"size": 248901, "module": "<value>", "file_key": "<value>", "file_type": "image", "object_id": "<id>", "description": "prejudge sonnet by boo however outrun mill ugh yahoo", "display_name": "Bridgette33", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 661141, "module": "<value>", "file_key": "<value>", "file_type": "audio", "object_id": "<id>", "description": "sleepily woefully against unless disrespect membership indeed declaration a untidy", "display_name": "Nick.Hessel13", "variable_name": "<value>", "variable_type": "<value>"}], "user_inputs": [{"position": 59348, "required": true, "object_id": "<id>", "description": "disrespect why finally cruelty down quickly squirm except", "display_name": "Amya47", "variable_name": "<value>", "variable_type": "<value>"}, {"position": 132101, "required": false, "object_id": "<id>", "description": "scarily quarterly exalt", "display_name": "Bettye_Moore", "variable_name": "<value>", "variable_type": "<value>"}, {"position": 35824, "required": false, "object_id": "<id>", "description": "yellowish worthwhile uh-huh outlying consequently", "display_name": "Micheal_Muller", "variable_name": "<value>", "variable_type": "<value>"}], "prompt_sections": [{"body": "<value>", "position": 182404}, {"body": "<value>", "position": 841485}, {"body": "<value>", "position": 355827}]}, {"name": "<value>", "files": [{"size": 650918, "module": "<value>", "file_key": "<value>", "file_type": "application", "object_id": "<id>", "description": "orient ah cinch youthfully hence", "display_name": "Korbin.Runolfsson86", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 883979, "module": "<value>", "file_key": "<value>", "file_type": "video", "object_id": "<id>", "description": "until only self-reliant", "display_name": "Ivy53", "variable_name": "<value>", "variable_type": "<value>"}], "user_inputs": [{"position": 809212, "required": false, "object_id": "<id>", "description": "via prejudge deserted lampoon since coolly surprise pupil even behind", "display_name": "Ruby.Hoeger15", "variable_name": "<value>", "variable_type": "<value>"}, {"position": 257393, "required": false, "object_id": "<id>", "description": "yahoo swing wherever beneath merrily", "display_name": "Katelin64", "variable_name": "<value>", "variable_type": "<value>"}], "prompt_sections": [{"body": "<value>", "position": 503615}]}]}
+          application/json: {"data": [{"name": "<value>", "default_model": "gpt-4o", "files": [{"size": 678317, "module": "<value>", "file_id": "", "type_id": "", "file_key": "<value>", "file_type": "video", "object_id": "<id>", "description": "biodegrade miserably fedora blah", "display_name": "Spencer.Koelpin", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 103421, "module": "<value>", "file_id": "", "type_id": "", "file_key": "<value>", "file_type": "image", "object_id": "<id>", "description": "er since truly bide along memorise ruin apparatus window", "display_name": "Henderson.Koch90", "variable_name": "<value>", "variable_type": "<value>"}], "user_inputs": [{"position": 424586, "required": true, "object_id": "<id>", "description": "a supposing regarding times", "display_name": "Joseph.Crooks", "variable_name": "<value>", "variable_type": "<value>"}, {"position": 895464, "required": true, "object_id": "<id>", "description": "strict behind along energetic oddball pasta thread", "display_name": "Darrel.Legros53", "variable_name": "<value>", "variable_type": "<value>"}], "prompt_sections": [{"body": "<value>", "position": 625809}, {"body": "<value>", "position": 19407}, {"body": "<value>", "position": 140142}]}, {"name": "<value>", "default_model": "gpt-4o", "files": [{"size": 29339, "module": "<value>", "file_id": "", "type_id": "", "file_key": "<value>", "file_type": "image", "object_id": "<id>", "description": "likely up questionably forgery glow warmhearted", "display_name": "Margret68", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 186930, "module": "<value>", "file_id": "", "type_id": "", "file_key": "<value>", "file_type": "video", "object_id": "<id>", "description": "duh how though char while beneath while", "display_name": "Richard.Hermiston", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 121863, "module": "<value>", "file_id": "", "type_id": "", "file_key": "<value>", "file_type": "audio", "object_id": "<id>", "description": "bah digitize amid yuppify extent", "display_name": "Phyllis24", "variable_name": "<value>", "variable_type": "<value>"}], "user_inputs": [], "prompt_sections": []}, {"name": "<value>", "default_model": "gpt-4o", "files": [], "user_inputs": [{"position": 847002, "required": true, "object_id": "<id>", "description": "clear-cut an mid aw disconnection which wetly typeface usable underneath", "display_name": "Jessie.Beahan66", "variable_name": "<value>", "variable_type": "<value>"}], "prompt_sections": [{"body": "<value>", "position": 204047}, {"body": "<value>", "position": 445709}]}]}
   get_app_by_id_v1_app__app_id__get:
     speakeasy-default-get-app-by-id-v1-app-app-id-get:
       parameters:
         path:
-          app_id: "47adbf4e-b0d6-44fd-a643-30949eaf1b55"
+          app_id: "494da5be-4224-44d6-879c-5a5ab8a332c3"
       responses:
         "200":
-          application/json: {"name": "<value>", "files": [], "user_inputs": [{"position": 477601, "required": false, "object_id": "<id>", "description": "so airmail rejigger under", "display_name": "Bernie.Cassin81", "variable_name": "<value>", "variable_type": "<value>"}], "prompt_sections": [{"body": "<value>", "position": 542393}]}
+          application/json: {"name": "<value>", "default_model": "gpt-4o", "files": [{"size": 228594, "module": "<value>", "file_id": "", "type_id": "", "file_key": "<value>", "file_type": "application", "object_id": "<id>", "description": "plumber vacantly judgementally how after", "display_name": "Ross_Towne7", "variable_name": "<value>", "variable_type": "<value>"}, {"size": 836263, "module": "<value>", "file_id": "", "type_id": "", "file_key": "<value>", "file_type": "video", "object_id": "<id>", "description": "yowza near as role hyphenation blah incidentally bah", "display_name": "Jacinthe.DuBuque", "variable_name": "<value>", "variable_type": "<value>"}], "user_inputs": [{"position": 346634, "required": false, "object_id": "<id>", "description": "boohoo smog moralise", "display_name": "Rozella_Heidenreich", "variable_name": "<value>", "variable_type": "<value>"}, {"position": 171846, "required": false, "object_id": "<id>", "description": "broadcast supposing solvency though indeed whether drive hopelessly abaft", "display_name": "Alexa.Fay", "variable_name": "<value>", "variable_type": "<value>"}], "prompt_sections": [{"body": "<value>", "position": 933798}, {"body": "<value>", "position": 805422}, {"body": "<value>", "position": 295771}]}
         "422":
           application/json: {}
   query_app_v1_app__app_id__query_post:
     speakeasy-default-query-app-v1-app-app-id-query-post:
       parameters:
         path:
-          app_id: "da7fa77e-f572-45dc-a417-baf2faf1fe5d"
+          app_id: "cf0da8ab-dfe6-4421-9e0a-b5d90dc41e8b"
       requestBody:
-        application/json: {}
+        application/json: {"inputs": {}, "stream": false}
       responses:
         "200":
           application/json: {"type": "<value>", "message": "<value>"}
         "422":
           application/json: {}
+examplesVersion: 1.0.0
 generatedTests: {}
